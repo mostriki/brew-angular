@@ -12,6 +12,7 @@ import { Brew } from './brew.model';
       Ibu: {{currentBrew.ibu}}<br>
       Abv: {{currentBrew.abv}}<br>
       Pints: {{currentBrew.pints}}<br>
+      <button (click)="editButtonHasBeenClicked(currentBrew)">Edit!</button>
       </li>
     </ul>
   `
@@ -20,4 +21,8 @@ import { Brew } from './brew.model';
 export class BrewListComponent {
   @Input() childBrewList: Brew[];
   @Output() clickSender = new EventEmitter();
+
+  editButtonHasBeenClicked(brewToEdit: Brew) {
+    this.clickSender.emit(brewToEdit);
+  }
 }

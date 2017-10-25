@@ -7,7 +7,8 @@ import { Brew } from './brew.model';
   <div class="container">
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
     <h3>{{currentFocus}}</h3>
-    <brew-list [childBrewList]="masterBrewList"></brew-list>
+    <brew-list [childBrewList]="masterBrewList" (clickSender)="editBrew($event)"></brew-list>
+    <edit-brew [childSelectedBrew]="selectedBrew"></edit-brew>
     <new-brew (newBrewSender)="addBrew($event)"></new-brew>
   </div>
   `
