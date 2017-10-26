@@ -8,7 +8,7 @@ import { Brew } from './brew.model';
     <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
     <h3>{{currentFocus}}</h3>
     <brew-list [childBrewList]="masterBrewList" (clickSender)="editBrew($event)"></brew-list>
-    <edit-brew [childSelectedBrew]="selectedBrew" (doneButtonClickedSender)="finishedEditing()" (deleteButtonClickedSender)="deleteBrew()"></edit-brew>
+    <edit-brew [childSelectedBrew]="selectedBrew" (doneButtonClickedSender)="finishedEditing()" (deleteButtonClickedSender)="deleteBrew()" (refillButtonClickedSender)="refillKeg()"></edit-brew>
     <new-brew (newBrewSender)="addBrew($event)"></new-brew>
   </div>
   `
@@ -42,5 +42,10 @@ export class AppComponent {
   deleteBrew() {
     let index = this.masterBrewList.indexOf(this.selectedBrew);
     this.masterBrewList.splice(index, 1);
+  }
+
+  refillKeg() {
+    let index = this.masterBrewList.indexOf(this.selectedBrew);
+    this.masterBrewList[index].pints = 124;
   }
 }

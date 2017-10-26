@@ -4,7 +4,12 @@ import { Brew } from './brew.model';
 @Component({
   selector: 'brew-list',
   template: `
-    <div *ngFor="let currentBrew of childBrewList">
+    <select (change)="onChange($event.target.value)">
+      <option value="allKegs">All Kegs</option>
+      <option value="fullKegs" selected="selected">Full Kegs</option>
+      <option value="emptyKegs">Empty Kegs</option>
+    </select>
+    <div *ngFor="let currentBrew of childBrewList | level:filterByLevel">
       <h2>{{currentBrew.name}} <button class="btn btn-primary" (click)="pourPint(currentBrew)">Pour Pint</button><button class="btn btn-success" (click)="pourGrowler(currentBrew)">Pour Growler</button></h2><br>
       <h3>{{currentBrew.brand}}</h3>
       <h3>{{currentBrew.details}}</h3>
@@ -63,4 +68,10 @@ export class BrewListComponent {
   progressBarPercent(currentBrew){
     return `${currentBrew.pints/124 * 100}%`;
   }
+
+  onChange(optionFromMenu) {
+    this.filterByLevel = optionFromMenu;
+  }
+
+  filterByLevel: string = "fullKegs";
 }
