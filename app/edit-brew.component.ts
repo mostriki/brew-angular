@@ -23,6 +23,7 @@ import { Brew } from './brew.model';
         <label>Enter Brew pints:</label>
         <input [(ngModel)]="childSelectedBrew.pints">
         <button (click)="doneButtonClicked()">Done</button>
+        <button (click)="deleteButtonClicked()">Delete</button>
       </div>
     </div>
   `
@@ -31,8 +32,13 @@ import { Brew } from './brew.model';
 export class EditBrewComponent {
   @Input() childSelectedBrew: Brew;
   @Output() doneButtonClickedSender = new EventEmitter();
+  @Output() deleteButtonClickedSender = new EventEmitter();
 
   doneButtonClicked() {
     this.doneButtonClickedSender.emit();
+  }
+
+  deleteButtonClicked() {
+    this.deleteButtonClickedSender.emit();
   }
 }
